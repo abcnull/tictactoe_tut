@@ -34,7 +34,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			#check if mouse is on the game board
-			if event.position.x < board_size:
+			if event.position.x < board_size and event.position.y < board_size:
 				#convert mouse position into grid location
 				grid_pos = Vector2i(event.position / cell_size)
 				if grid_data[grid_pos.y][grid_pos.x] == 0:
@@ -105,8 +105,10 @@ func check_win():
 		#check if either player has all of the markers in one line
 		if row_sum == 3 or col_sum == 3 or diagonal1_sum == 3 or diagonal2_sum == 3:
 			winner = 1
+			break
 		elif row_sum == -3 or col_sum == -3 or diagonal1_sum == -3 or diagonal2_sum == -3:
 			winner = -1
+			break
 	return winner
 
 
